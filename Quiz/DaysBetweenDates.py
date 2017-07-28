@@ -22,13 +22,12 @@ def daysInMonth(year, month):
         or month == 8 or month == 10 or month == 12:
             return 31
     if month == 2:
-        # Not accounting for leap-year, yet
+        if isLeapYear(year):
+            return 29
         return 28
     return 30
 
 def nextDate(year, month, date):
-    """Warning: This version incorrectly assumes
-        all months have 30 days!"""
     if date < daysInMonth(year, month):
         return year, month, date + 1
     else:
@@ -60,7 +59,8 @@ def test():
     # Tests with 30-day months
     assert daysBetweenDates(2014, 1, 1, 2014, 1, 1) == 0
     assert daysBetweenDates(2014, 1, 1, 2014, 1, 2) == 1
-    assert daysBetweenDates(2014, 1, 1, 2015, 1, 1) == 365
+    assert daysBetweenDates(2100, 1, 1, 2101, 1, 1) == 365
+    assert daysBetweenDates(2000, 1, 1, 2001, 1, 1) == 366
     assert nextDate(2014, 1, 30) == (2014, 1, 31)
     assert nextDate(2014, 2, 28) == (2014, 3, 1)
     assert nextDate(2014, 4, 30) == (2014, 5, 1)
