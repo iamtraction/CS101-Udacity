@@ -8,11 +8,20 @@
 # Calendars are very complicated and they have changed over history.
 # Dates are only valid for Gregorian Calendar (Started from 15 Oct. 1582)
 
+def isLeapYear(year):
+    if year % 100 == 0 and year % 400 == 0:
+        return True
+    if year % 4 == 0:
+        return True
+    return False
+
+def daysInMonth(year, month):
+    return 30
+
 def nextDate(year, month, date):
     """Warning: This version incorrectly assumes
         all months have 30 days!"""
-    date += 1;
-    if date < 30:
+    if date < daysInMonth(year, month):
         return year, month, date + 1
     else:
         if month < 12:
@@ -32,8 +41,20 @@ def dateIsBefore(year1, month1, day1, year2, month2, day2):
 
 def daysBetweenDays(year1, month1, day1, year2, month2, day2):
     """Returns the number of days between year1/month1/day1 and year2/month2/day2."""
+    assert not dateIsBefore(year2, month2, day2, year1, month1, day1)
     days = 0
     while dateIsBefore(year1, month1, day1, year2, month2, day2):
         year1, month1, day1 = nextDate(year1, month1, day1)
         days += 1
     return days
+
+def test():
+    # Tests with 30-day months
+    assert daysBetweenDays(2014, 1, 1, 2014, 1, 1) == 0
+    assert daysBetweenDays(2014, 1, 1, 2014, 1, 2) == 1
+    assert nextDate(2014, 1, 1) == (2014, 1, 2)
+    assert nextDate(2014, 4, 30) == (2014, 5, 1)
+    assert nextDate(2014, 12, 31) == (2015, 1, 1)
+    print "Tests passed successfully!"
+
+test()
