@@ -9,11 +9,13 @@
 # Dates are only valid for Gregorian Calendar (Started from 15 Oct. 1582)
 
 def isLeapYear(year):
-    if year % 100 == 0 and year % 400 == 0:
+    if year % 4 != 0:
+        return False
+    if year % 100 != 0:
         return True
-    if year % 4 == 0:
-        return True
-    return False
+    if year % 400 != 0:
+        return False
+    return True
 
 def daysInMonth(year, month):
     if month == 1 or month == 3 or month == 5 or month == 7 \
@@ -63,6 +65,14 @@ def test():
     assert nextDate(2014, 2, 28) == (2014, 3, 1)
     assert nextDate(2014, 4, 30) == (2014, 5, 1)
     assert nextDate(2014, 12, 31) == (2015, 1, 1)
+    assert isLeapYear(1600) == True
+    assert isLeapYear(2000) == True
+    assert isLeapYear(1700) == False
+    assert isLeapYear(2100) == False
+    assert isLeapYear(1800) == False
+    assert isLeapYear(2200) == False
+    assert isLeapYear(1900) == False
+    assert isLeapYear(2300) == False
     print "Tests passed successfully!"
 
 test()
