@@ -56,7 +56,6 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
     return days
 
 def test():
-    # Tests with 30-day months
     assert daysBetweenDates(2014, 1, 1, 2014, 1, 1) == 0
     assert daysBetweenDates(2014, 1, 1, 2014, 1, 2) == 1
     assert daysBetweenDates(2100, 1, 1, 2101, 1, 1) == 365
