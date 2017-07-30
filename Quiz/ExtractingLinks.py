@@ -1,6 +1,7 @@
 # Write Python code that prints all the links in the given page.
 
 def get_next_target(page):
+    """Returns the next target in the (seed) page."""
     start_link = page.find('href=')
 
     if start_link == -1:
@@ -13,15 +14,18 @@ def get_next_target(page):
 
     return url, end_quote
 
-def print_all_links(page):
+def get_all_links(page):
+    """Returns all the links in the given (seed) page."""
+    links = []
     while True:
         url, end_pos = get_next_target(page)
         if url:
-            print url
+            links.append(url)
             page = page[end_pos:]
         else:
             break
+    return links
 
-print_all_links('''<div id="top_bin"> <div id="top_content" class="width960">
+print get_all_links('''<div id="top_bin"> <div id="top_content" class="width960">
    <div class="udacity float-left"> <a href="/">
    <div class="udacity float-right"> <a href="https://sankarsankampa.com">''')
