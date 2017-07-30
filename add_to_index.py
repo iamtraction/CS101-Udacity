@@ -17,11 +17,10 @@ index = []
 
 def add_to_index(index, keyword, url):
     """Adds a keyword and an url to the index list"""
-    if index:
-        for key in index:
-            if keyword == key[0]:
-                key[1].append(url)
-                return
+    for key in index:
+        if keyword == key[0]:
+            key[1].append(url)
+            return
     index.append([keyword, [url]])
 
 add_to_index(index, 'k3rn31p3nic', 'https://sankarsankampa.com')
