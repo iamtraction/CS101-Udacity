@@ -1,4 +1,4 @@
-# Write Python code that prints all the links in the given page.
+# Write Python code that extracts all the links in the given page.
 
 def get_next_target(page):
     """Returns the next target in the (seed) page."""
